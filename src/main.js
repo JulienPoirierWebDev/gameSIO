@@ -123,18 +123,6 @@ function todoFeature() {
 }
 
 function memory() {
-	const cardsFlipped = [null, null];
-
-	const uniqueCards = [
-		{ content: 'A', href: '' },
-		{ content: 'B', href: '' },
-		{ content: 'C', href: '' },
-		{ content: 'D', href: '' },
-		{ content: 'E', href: '' },
-		{ content: 'F', href: '' },
-		{ content: 'G', href: '' },
-	];
-
 	// 1 - Créer les cartes
 	function createDeck(cards) {
 		// initialiser le deck vide
@@ -181,26 +169,52 @@ function memory() {
 
 	// 3 - Placer les cartes dans le jeu
 	function displayDeckInHTML(deck) {
+		// Selection des elements qui interagissent ou que l'on modifie
 		const gameboard = document.querySelector('#game-board');
 
+		// Mise en place dans le flux HTML
 		for (const card of deck) {
 			const div = document.createElement('div');
+			div.classList.add('card');
+			div.dataset.id = card.id;
+
 			const p = document.createElement('p');
+			p.textContent = card.content;
 
 			div.appendChild(p);
 			gameboard.appendChild(div);
 		}
-
-		// Selection des elements qui interagissent ou que l'on modifie
-
-		// Mise en place dans le flux HTML
 	}
 
+	const uniqueCards = [
+		{ content: 'A', href: '' },
+		{ content: 'B', href: '' },
+		{ content: 'C', href: '' },
+		{ content: 'D', href: '' },
+		{ content: 'E', href: '' },
+		{ content: 'F', href: '' },
+	];
+
+	// Mettre en place le plateau de jeu
 	const newDeck = createDeck(uniqueCards);
 	const deckReady = changeCardsOrder(newDeck);
 	displayDeckInHTML(deckReady);
 
-	// Mettre en place le plateau de jeu
+	let clickedCards = [];
+
+	function gameplayInit() {
+		const cards = document.querySelectorAll('.card');
+
+		for (const card of cards) {
+			card.addEventListener('click', () => {
+				clickedCards.push(card.dataset.id);
+				//console.log(clickedCards);
+			});
+		}
+	}
+
+	gameplayInit();
+
 	// -----------------------------------------------------------------
 	// ETAPE DU JEU
 	// 1- Utilisateur clique sur un carte
