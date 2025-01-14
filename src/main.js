@@ -135,6 +135,7 @@ function memory() {
 		{ content: 'G', href: '' },
 	];
 
+	// 1 - Créer les cartes
 	function createDeck(cards) {
 		// initialiser le deck vide
 		const deck = [];
@@ -170,23 +171,36 @@ function memory() {
 		}
 		return deck;
 	}
+	// 2 - Melanger les cartes
+	function changeCardsOrder(deck) {
+		const sortDeck = deck;
+
+		// TODO
+		return sortDeck;
+	}
+
+	// 3 - Placer les cartes dans le jeu
+	function displayDeckInHTML(deck) {
+		const gameboard = document.querySelector('#game-board');
+
+		for (const card of deck) {
+			const div = document.createElement('div');
+			const p = document.createElement('p');
+
+			div.appendChild(p);
+			gameboard.appendChild(div);
+		}
+
+		// Selection des elements qui interagissent ou que l'on modifie
+
+		// Mise en place dans le flux HTML
+	}
 
 	const newDeck = createDeck(uniqueCards);
-	console.log(newDeck);
-
-	const deck = [
-		{ content: 'A', href: '', id: 1, matched: false },
-		{ content: 'A', href: '', id: 2, matched: false },
-		{ content: 'B', href: '', id: 3, matched: false },
-		{ content: 'B', href: '', id: 4, matched: false },
-		{ content: 'C', href: '', id: 5, matched: false },
-		{ content: 'C', href: '', id: 6, matched: false },
-	];
+	const deckReady = changeCardsOrder(newDeck);
+	displayDeckInHTML(deckReady);
 
 	// Mettre en place le plateau de jeu
-	// 1 - Créer les cartes
-	// 2 - ???
-	// 3 - Placer les cartes dans le jeu
 	// -----------------------------------------------------------------
 	// ETAPE DU JEU
 	// 1- Utilisateur clique sur un carte
