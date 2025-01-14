@@ -132,23 +132,56 @@ function memory() {
 		{ content: 'D', href: '' },
 		{ content: 'E', href: '' },
 		{ content: 'F', href: '' },
+		{ content: 'G', href: '' },
 	];
 
 	function createDeck(cards) {
+		// initialiser le deck vide
 		const deck = [];
+		let actualId = 1;
 
-		// créer une paire de carte par carte unique dans les cards
+		// Pour chaque carte du paquet de cartes uniques, on exécute ce code
+		for (const card of cards) {
+			// créer la première carte d'un type
+			const cardPair1 = {
+				content: card.content,
+				href: card.href,
+				id: actualId,
+				matched: false,
+			};
 
-		/* 
-		const element = {XXX};
+			// augmenter l'id de 1 pour que la paire est un id différent
+			actualId++;
 
-		deck.push(element)
-		// Cela ajoute element a la fin du tableau
+			// créer la 2e carte d'un type
+			const cardPair2 = {
+				content: card.content,
+				href: card.href,
+				id: actualId,
+				matched: false,
+			};
 
-		*/
+			// id + 1
+			actualId++;
 
+			// on ajoute les 2 cartes au deck
+			deck.push(cardPair1);
+			deck.push(cardPair2);
+		}
 		return deck;
 	}
+
+	const newDeck = createDeck(uniqueCards);
+	console.log(newDeck);
+
+	const deck = [
+		{ content: 'A', href: '', id: 1, matched: false },
+		{ content: 'A', href: '', id: 2, matched: false },
+		{ content: 'B', href: '', id: 3, matched: false },
+		{ content: 'B', href: '', id: 4, matched: false },
+		{ content: 'C', href: '', id: 5, matched: false },
+		{ content: 'C', href: '', id: 6, matched: false },
+	];
 
 	// Mettre en place le plateau de jeu
 	// 1 - Créer les cartes
