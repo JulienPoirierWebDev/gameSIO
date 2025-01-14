@@ -45,3 +45,7 @@
 .visible {
 	display: block;
 }
+
+.find {
+	background-color: lightgreen;
+}

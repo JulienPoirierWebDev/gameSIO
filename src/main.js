@@ -222,18 +222,47 @@ function memory() {
 					});
 
 					if (filteredCards[0].content === filteredCards[1].content) {
-						console.log('you win');
+						handleSameCards(filteredCards);
 					} else {
-						console.log('you lose');
-						setTimeout(() => {
-							for (const card of cards) {
-								card.children[0].classList.add('hidden');
-							}
-							clickedCards = [];
-						}, 2000);
+						handleDifferentCards();
 					}
+
+					clickedCards = [];
 				}
 			});
+		}
+
+		function handleSameCards(filteredCards) {
+			console.log('you win');
+			filteredCards[0].matched = true;
+			filteredCards[1].matched = true;
+
+			setTimeout(() => {
+				for (const card of cards) {
+					console.log(filteredCards[0].id);
+
+					if (
+						Number(card.dataset.id) ===
+							Number(filteredCards[0].id) ||
+						Number(card.dataset.id) === Number(filteredCards[1].id)
+					) {
+						card.classList.add('find');
+					}
+				}
+			}, 100);
+		}
+
+		function handleDifferentCards() {
+			console.log('you lose');
+			setTimeout(() => {
+				for (const card of cards) {
+					console.log(card);
+
+					if (!card.classList.contains('find')) {
+						card.children[0].classList.add('hidden');
+					}
+				}
+			}, 1000);
 		}
 	}
 
