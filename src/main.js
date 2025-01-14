@@ -208,28 +208,31 @@ function memory() {
 
 		for (const card of cards) {
 			card.addEventListener('click', () => {
-				clickedCards.push(card.dataset.id);
-				console.log(clickedCards);
-				console.log(deckReady);
-
-				const filteredCards = deckReady.filter((element) => {
-					console.log(element);
-					return (
-						element.id === Number(clickedCards[0]) ||
-						element.id === Number(clickedCards[1])
-					);
-				});
-
-				if (
-					filteredCards.length > 1 &&
-					filteredCards[0].content === filteredCards[1].content
-				) {
-					console.log('you win');
-				} else {
-					console.log('you lose');
+				if (clickedCards.length < 2) {
+					clickedCards.push(card.dataset.id);
+					card.children[0].classList.toggle('hidden');
 				}
 
-				console.log('filter', filteredCards);
+				if (clickedCards.length >= 2) {
+					const filteredCards = deckReady.filter((element) => {
+						return (
+							element.id === Number(clickedCards[0]) ||
+							element.id === Number(clickedCards[1])
+						);
+					});
+
+					if (filteredCards[0].content === filteredCards[1].content) {
+						console.log('you win');
+					} else {
+						console.log('you lose');
+						setTimeout(() => {
+							for (const card of cards) {
+								card.children[0].classList.add('hidden');
+							}
+							clickedCards = [];
+						}, 2000);
+					}
+				}
 			});
 		}
 	}
@@ -257,3 +260,24 @@ function memory() {
 }
 
 memory();
+
+/*
+
+
+				const filteredCards = deckReady.filter((element) => {
+					console.log(element);
+					return (
+						element.id === Number(clickedCards[0]) ||
+						element.id === Number(clickedCards[1])
+					);
+				});
+
+				if (
+					filteredCards.length > 1 &&
+					filteredCards[0].content === filteredCards[1].content
+				) {
+					console.log('you win');
+				} else {
+					console.log('you lose');
+				}
+*/
