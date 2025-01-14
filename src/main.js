@@ -179,6 +179,7 @@ function memory() {
 			div.dataset.id = card.id;
 
 			const p = document.createElement('p');
+			p.classList.add('hidden');
 			p.textContent = card.content;
 
 			div.appendChild(p);
@@ -208,7 +209,27 @@ function memory() {
 		for (const card of cards) {
 			card.addEventListener('click', () => {
 				clickedCards.push(card.dataset.id);
-				//console.log(clickedCards);
+				console.log(clickedCards);
+				console.log(deckReady);
+
+				const filteredCards = deckReady.filter((element) => {
+					console.log(element);
+					return (
+						element.id === Number(clickedCards[0]) ||
+						element.id === Number(clickedCards[1])
+					);
+				});
+
+				if (
+					filteredCards.length > 1 &&
+					filteredCards[0].content === filteredCards[1].content
+				) {
+					console.log('you win');
+				} else {
+					console.log('you lose');
+				}
+
+				console.log('filter', filteredCards);
 			});
 		}
 	}
@@ -219,12 +240,17 @@ function memory() {
 	// ETAPE DU JEU
 	// 1- Utilisateur clique sur un carte
 	// 2 - Retenir la carte
+
 	// 3 - Retourner la carte
+
 	// 4 - Actualiser le nombre de coup de jeu
+
 	// 5 - Utilisateur clique sur la 2e carte
 	// 6 - Retenir la carte
 	// 7 - Retourner la 2e carte
+
 	// 8 - On actualise le nombre de coups de jeu
+
 	// 9 - Vérification des cartes
 	// 9 - A : Ce sont les mêmes : les cartes se vérouillent et deviennent vertes
 	// 9 - B : Ce ne sont pas les mêmes : les cartes vibres (animation d'échec) et se retournent
