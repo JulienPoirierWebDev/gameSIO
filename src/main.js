@@ -163,7 +163,10 @@ function memory() {
 	function changeCardsOrder(deck) {
 		const sortDeck = deck;
 
-		// TODO
+		sortDeck.sort(() => {
+			return 0.5 > Math.random();
+		});
+		
 		return sortDeck;
 	}
 
