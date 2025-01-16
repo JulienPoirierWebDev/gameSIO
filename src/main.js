@@ -161,12 +161,12 @@ function memory() {
 	}
 	// 2 - Melanger les cartes
 	function changeCardsOrder(deck) {
-		const sortDeck = deck;
+		const sortDeck = Array.from(deck);
 
 		sortDeck.sort(() => {
 			return 0.5 > Math.random();
 		});
-		
+
 		return sortDeck;
 	}
 
